@@ -64,4 +64,20 @@ En esta página se encontrará un generador de aplicaciones web generados a pati
 
 ```
 
+## Diagramas usados:
+
+### Diagramas de casos de uso:
+
 ![App Screenshot](diagrama_de_actividades.png)
+
+### Diagrama de casos de uso:
+
+![App Screenshot](Diagrama de casos de uso.jpg)
+
+### Diagrama de clases:
+
+![App Screenshot](Diagrama de clases.jpg)
+
+### Diagramas de casos de uso:
+
+![App Screenshot](Diagrama de secuencias.jpg)
