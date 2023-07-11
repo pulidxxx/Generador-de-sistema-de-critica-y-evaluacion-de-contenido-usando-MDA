@@ -66,7 +66,7 @@ En esta página se encontrará un generador de aplicaciones web generados a pati
 
 ## Diagramas usados:
 
-### Diagramas de casos de uso:
+### Diagramas de actividades:
 
 ![App Screenshot](diagrama_de_actividades.png)
 
@@ -78,6 +78,6 @@ En esta página se encontrará un generador de aplicaciones web generados a pati
 
 ![App Screenshot](Diagrama_de_clases.jpg)
 
-### Diagramas de casos de uso:
+### Diagramas de secuencias:
 
 ![App Screenshot](Diagrama_de_secuencias.jpg)
