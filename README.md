@@ -72,12 +72,12 @@ En esta página se encontrará un generador de aplicaciones web generados a pati
 
 ### Diagrama de casos de uso:
 
-![App Screenshot](Diagrama de casos de uso.jpg)
+![App Screenshot](Diagrama_de_casos_de_uso.jpg)
 
 ### Diagrama de clases:
 
-![App Screenshot](Diagrama de clases.jpg)
+![App Screenshot](Diagrama_de_clases.jpg)
 
 ### Diagramas de casos de uso:
 
-![App Screenshot](Diagrama de secuencias.jpg)
+![App Screenshot](Diagrama_de_secuencias.jpg)
