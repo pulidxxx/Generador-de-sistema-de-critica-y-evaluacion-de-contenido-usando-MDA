@@ -63,3 +63,5 @@ En esta página se encontrará un generador de aplicaciones web generados a pati
                     <li>@Html.ActionLink("Comentarios", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>  Para visualizar la sección de Contacto
 
 ```
+
+![App Screenshot](diagrama_de_actividades.png)
