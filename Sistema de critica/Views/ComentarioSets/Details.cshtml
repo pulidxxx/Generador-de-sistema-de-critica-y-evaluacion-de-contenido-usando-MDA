@@ -1,0 +1,42 @@
+﻿@model Sistema_de_critica.ComentarioSet
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ComentarioSet</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.contenido_comentario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.contenido_comentario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Reseña.titulo_reseña)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Reseña.titulo_reseña)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Usuario.nombre_usuario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Usuario.nombre_usuario)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IdComentario }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

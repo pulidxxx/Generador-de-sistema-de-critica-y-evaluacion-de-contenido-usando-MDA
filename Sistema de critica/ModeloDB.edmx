@@ -1,0 +1,372 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="SistemaDeCriticaBDModel1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Categoria">
+          <Key>
+            <PropertyRef Name="IdCategoria" />
+          </Key>
+          <Property Name="IdCategoria" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre_categoria" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="descripcion_categoria" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ComentarioSet">
+          <Key>
+            <PropertyRef Name="IdComentario" />
+          </Key>
+          <Property Name="IdComentario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="contenido_comentario" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="UsuarioId" Type="int" Nullable="false" />
+          <Property Name="ReseñaIdReseña" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Noticias">
+          <Key>
+            <PropertyRef Name="IdNoticias" />
+          </Key>
+          <Property Name="IdNoticias" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="titular_noticia" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="fecha_noticia" Type="datetime" Nullable="false" />
+          <Property Name="contenido_noticia" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="UsuarioId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Reseña">
+          <Key>
+            <PropertyRef Name="IdReseña" />
+          </Key>
+          <Property Name="IdReseña" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="titulo_reseña" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="contenido_reseña" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="puntuacion_reseña" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="fecha_reseña" Type="datetime" Nullable="false" />
+          <Property Name="UsuarioId" Type="int" Nullable="false" />
+          <Property Name="Categoria_IdCategoria" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre_usuario" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="contraseña_usuario" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_ReseñaCategoria">
+          <End Role="Categoria" Type="Self.Categoria" Multiplicity="1" />
+          <End Role="Reseña" Type="Self.Reseña" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categoria">
+              <PropertyRef Name="IdCategoria" />
+            </Principal>
+            <Dependent Role="Reseña">
+              <PropertyRef Name="Categoria_IdCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReseñaComentario">
+          <End Role="Reseña" Type="Self.Reseña" Multiplicity="1" />
+          <End Role="ComentarioSet" Type="Self.ComentarioSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reseña">
+              <PropertyRef Name="IdReseña" />
+            </Principal>
+            <Dependent Role="ComentarioSet">
+              <PropertyRef Name="ReseñaIdReseña" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsuarioComentario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="ComentarioSet" Type="Self.ComentarioSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ComentarioSet">
+              <PropertyRef Name="UsuarioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsuarioNoticias">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Noticias" Type="Self.Noticias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Noticias">
+              <PropertyRef Name="UsuarioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsuarioReseña">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Reseña" Type="Self.Reseña" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Reseña">
+              <PropertyRef Name="UsuarioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SistemaDeCriticaBDModel1StoreContainer">
+          <EntitySet Name="Categoria" EntityType="Self.Categoria" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ComentarioSet" EntityType="Self.ComentarioSet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Noticias" EntityType="Self.Noticias" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reseña" EntityType="Self.Reseña" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ReseñaCategoria" Association="Self.FK_ReseñaCategoria">
+            <End Role="Categoria" EntitySet="Categoria" />
+            <End Role="Reseña" EntitySet="Reseña" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReseñaComentario" Association="Self.FK_ReseñaComentario">
+            <End Role="Reseña" EntitySet="Reseña" />
+            <End Role="ComentarioSet" EntitySet="ComentarioSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsuarioComentario" Association="Self.FK_UsuarioComentario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="ComentarioSet" EntitySet="ComentarioSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsuarioNoticias" Association="Self.FK_UsuarioNoticias">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Noticias" EntitySet="Noticias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsuarioReseña" Association="Self.FK_UsuarioReseña">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Reseña" EntitySet="Reseña" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SistemaDeCriticaBDModel1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Categoria">
+          <Key>
+            <PropertyRef Name="IdCategoria" />
+          </Key>
+          <Property Name="IdCategoria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre_categoria" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="descripcion_categoria" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Reseña" Relationship="Self.FK_ReseñaCategoria" FromRole="Categoria" ToRole="Reseña" />
+        </EntityType>
+        <EntityType Name="ComentarioSet">
+          <Key>
+            <PropertyRef Name="IdComentario" />
+          </Key>
+          <Property Name="IdComentario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="contenido_comentario" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UsuarioId" Type="Int32" Nullable="false" />
+          <Property Name="ReseñaIdReseña" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Reseña" Relationship="Self.FK_ReseñaComentario" FromRole="ComentarioSet" ToRole="Reseña" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_UsuarioComentario" FromRole="ComentarioSet" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Noticias">
+          <Key>
+            <PropertyRef Name="IdNoticias" />
+          </Key>
+          <Property Name="IdNoticias" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="titular_noticia" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="fecha_noticia" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="contenido_noticia" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UsuarioId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_UsuarioNoticias" FromRole="Noticias" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Reseña">
+          <Key>
+            <PropertyRef Name="IdReseña" />
+          </Key>
+          <Property Name="IdReseña" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="titulo_reseña" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="contenido_reseña" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="puntuacion_reseña" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="fecha_reseña" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UsuarioId" Type="Int32" Nullable="false" />
+          <Property Name="Categoria_IdCategoria" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Categoria" Relationship="Self.FK_ReseñaCategoria" FromRole="Reseña" ToRole="Categoria" />
+          <NavigationProperty Name="ComentarioSet" Relationship="Self.FK_ReseñaComentario" FromRole="Reseña" ToRole="ComentarioSet" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_UsuarioReseña" FromRole="Reseña" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre_usuario" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="contraseña_usuario" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ComentarioSet" Relationship="Self.FK_UsuarioComentario" FromRole="Usuario" ToRole="ComentarioSet" />
+          <NavigationProperty Name="Noticias" Relationship="Self.FK_UsuarioNoticias" FromRole="Usuario" ToRole="Noticias" />
+          <NavigationProperty Name="Reseña" Relationship="Self.FK_UsuarioReseña" FromRole="Usuario" ToRole="Reseña" />
+        </EntityType>
+        <Association Name="FK_ReseñaCategoria">
+          <End Role="Categoria" Type="Self.Categoria" Multiplicity="1" />
+          <End Role="Reseña" Type="Self.Reseña" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categoria">
+              <PropertyRef Name="IdCategoria" />
+            </Principal>
+            <Dependent Role="Reseña">
+              <PropertyRef Name="Categoria_IdCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReseñaComentario">
+          <End Role="Reseña" Type="Self.Reseña" Multiplicity="1" />
+          <End Role="ComentarioSet" Type="Self.ComentarioSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reseña">
+              <PropertyRef Name="IdReseña" />
+            </Principal>
+            <Dependent Role="ComentarioSet">
+              <PropertyRef Name="ReseñaIdReseña" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsuarioComentario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="ComentarioSet" Type="Self.ComentarioSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ComentarioSet">
+              <PropertyRef Name="UsuarioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsuarioNoticias">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Noticias" Type="Self.Noticias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Noticias">
+              <PropertyRef Name="UsuarioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsuarioReseña">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Reseña" Type="Self.Reseña" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Reseña">
+              <PropertyRef Name="UsuarioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SistemaDeCriticaBDEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Categoria" EntityType="Self.Categoria" />
+          <EntitySet Name="ComentarioSet" EntityType="Self.ComentarioSet" />
+          <EntitySet Name="Noticias" EntityType="Self.Noticias" />
+          <EntitySet Name="Reseña" EntityType="Self.Reseña" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" />
+          <AssociationSet Name="FK_ReseñaCategoria" Association="Self.FK_ReseñaCategoria">
+            <End Role="Categoria" EntitySet="Categoria" />
+            <End Role="Reseña" EntitySet="Reseña" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReseñaComentario" Association="Self.FK_ReseñaComentario">
+            <End Role="Reseña" EntitySet="Reseña" />
+            <End Role="ComentarioSet" EntitySet="ComentarioSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsuarioComentario" Association="Self.FK_UsuarioComentario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="ComentarioSet" EntitySet="ComentarioSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsuarioNoticias" Association="Self.FK_UsuarioNoticias">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Noticias" EntitySet="Noticias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsuarioReseña" Association="Self.FK_UsuarioReseña">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Reseña" EntitySet="Reseña" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SistemaDeCriticaBDModel1StoreContainer" CdmEntityContainer="SistemaDeCriticaBDEntities1">
+          <EntitySetMapping Name="Categoria">
+            <EntityTypeMapping TypeName="SistemaDeCriticaBDModel1.Categoria">
+              <MappingFragment StoreEntitySet="Categoria">
+                <ScalarProperty Name="IdCategoria" ColumnName="IdCategoria" />
+                <ScalarProperty Name="nombre_categoria" ColumnName="nombre_categoria" />
+                <ScalarProperty Name="descripcion_categoria" ColumnName="descripcion_categoria" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ComentarioSet">
+            <EntityTypeMapping TypeName="SistemaDeCriticaBDModel1.ComentarioSet">
+              <MappingFragment StoreEntitySet="ComentarioSet">
+                <ScalarProperty Name="IdComentario" ColumnName="IdComentario" />
+                <ScalarProperty Name="contenido_comentario" ColumnName="contenido_comentario" />
+                <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
+                <ScalarProperty Name="ReseñaIdReseña" ColumnName="ReseñaIdReseña" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Noticias">
+            <EntityTypeMapping TypeName="SistemaDeCriticaBDModel1.Noticias">
+              <MappingFragment StoreEntitySet="Noticias">
+                <ScalarProperty Name="IdNoticias" ColumnName="IdNoticias" />
+                <ScalarProperty Name="titular_noticia" ColumnName="titular_noticia" />
+                <ScalarProperty Name="fecha_noticia" ColumnName="fecha_noticia" />
+                <ScalarProperty Name="contenido_noticia" ColumnName="contenido_noticia" />
+                <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reseña">
+            <EntityTypeMapping TypeName="SistemaDeCriticaBDModel1.Reseña">
+              <MappingFragment StoreEntitySet="Reseña">
+                <ScalarProperty Name="IdReseña" ColumnName="IdReseña" />
+                <ScalarProperty Name="titulo_reseña" ColumnName="titulo_reseña" />
+                <ScalarProperty Name="contenido_reseña" ColumnName="contenido_reseña" />
+                <ScalarProperty Name="puntuacion_reseña" ColumnName="puntuacion_reseña" />
+                <ScalarProperty Name="fecha_reseña" ColumnName="fecha_reseña" />
+                <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
+                <ScalarProperty Name="Categoria_IdCategoria" ColumnName="Categoria_IdCategoria" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuario">
+            <EntityTypeMapping TypeName="SistemaDeCriticaBDModel1.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="nombre_usuario" ColumnName="nombre_usuario" />
+                <ScalarProperty Name="contraseña_usuario" ColumnName="contraseña_usuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

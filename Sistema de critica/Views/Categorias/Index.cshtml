@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Sistema_de_critica.Categoria>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.nombre_categoria)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.descripcion_categoria)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.nombre_categoria)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.descripcion_categoria)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.IdCategoria }) |
+            @Html.ActionLink("Details", "Details", new { id=item.IdCategoria }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.IdCategoria })
+        </td>
+    </tr>
+}
+
+</table>

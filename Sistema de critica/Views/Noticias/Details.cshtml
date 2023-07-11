@@ -1,0 +1,50 @@
+﻿@model Sistema_de_critica.Noticias
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Noticias</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.titular_noticia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.titular_noticia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fecha_noticia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fecha_noticia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.contenido_noticia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.contenido_noticia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Usuario.nombre_usuario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Usuario.nombre_usuario)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IdNoticias }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,66 @@
+﻿@model Sistema_de_critica.Reseña
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Reseña</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.titulo_reseña)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.titulo_reseña)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.contenido_reseña)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.contenido_reseña)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.puntuacion_reseña)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.puntuacion_reseña)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fecha_reseña)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fecha_reseña)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Categoria.nombre_categoria)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Categoria.nombre_categoria)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Usuario.nombre_usuario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Usuario.nombre_usuario)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IdReseña }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

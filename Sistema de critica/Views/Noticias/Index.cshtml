@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Sistema_de_critica.Noticias>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Noticias</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.titular_noticia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fecha_noticia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.contenido_noticia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Usuario.nombre_usuario)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.titular_noticia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fecha_noticia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.contenido_noticia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Usuario.nombre_usuario)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.IdNoticias }) |
+            @Html.ActionLink("Details", "Details", new { id=item.IdNoticias }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.IdNoticias })
+        </td>
+    </tr>
+}
+
+</table>
